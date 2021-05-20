@@ -2,20 +2,20 @@
 if(!isset($_SESSION)) { session_start(); }
 include("header.php");
 include("dbconnection.php");
-if($_SESSION[randnumber]  == $_POST[randnumber])
+if($_SESSION['randnumber']  == $_POST['randnumber'])
 {
 if(isset($_SESSION["adminid"]))
 {
 		echo "<script>window.location='adminpanel.php';</script>";
 }
-if(isset($_POST[submit]))
+if(isset($_POST['submit']))
 {
 	$sql = "SELECT * FROM admin WHERE login_id='$_POST[emailid]' AND password='$_POST[password]' AND status='Active' ";
 	$qsql = mysqli_query($con,$sql);
 	if(mysqli_num_rows($qsql) == 1)
 	{
 		$rslogin = mysqli_fetch_array($qsql);
-		$_SESSION[adminid] = $rslogin[admin_id];
+		$_SESSION['adminid'] = $rslogin['admin_id'];
 		echo "<script>window.location='adminpanel.php';</script>";
 	}
 	else
@@ -25,7 +25,7 @@ if(isset($_POST[submit]))
 }
 }
 $randnumber = rand();
-$_SESSION[randnumber] = $randnumber;
+$_SESSION['randnumber'] = $randnumber;
 ?>
 <div id="featured">
 			<div class="container">

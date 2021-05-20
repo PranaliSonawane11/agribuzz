@@ -2,23 +2,23 @@
 if(!isset($_SESSION)) { session_start(); }
 include("header.php");
 include("dbconnection.php");
-if($_SESSION[randnumber]  == $_POST[randnumber])
+if($_SESSION['randnumber']  == $_POST['randnumber'])
 {
-if(isset($_SESSION[customerid]))
+if(isset($_SESSION['customerid']))
 {
 	echo "<script>window.location='customerpanel.php';</script>";
 }
-if(isset($_POST[submit]))
+if(isset($_POST['submit']))
 {
 	$sql = "SELECT * FROM customer WHERE email_id='$_POST[emailid]' AND password='$_POST[password]' AND status='Active' ";
 	$qsql = mysqli_query($con,$sql);
 	if(mysqli_num_rows($qsql) == 1)
 	{
 		$rslogin = mysqli_fetch_array($qsql);
-		$_SESSION[customerid] = $rslogin[customer_id]; 
-		if(isset($_GET[pagename]))
+		$_SESSION['customerid'] = $rslogin['customer_id']; 
+		if(isset($_GET['pagename']))
 		{
-			echo "<script>window.location='" . $_GET[pagename] . "?productid=" . $_GET[productid] . "';</script>";
+			echo "<script>window.location='" . $_GET['pagename'] . "?productid=" . $_GET['productid'] . "';</script>";
 		}
 		else
 		{
@@ -32,7 +32,7 @@ if(isset($_POST[submit]))
 }
 }
 $randnumber = rand();
-$_SESSION[randnumber] = $randnumber;
+$_SESSION['randnumber'] = $randnumber;
 ?>
 	
 
