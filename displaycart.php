@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) { session_start(); }
 include("header.php");
 include("dbconnection.php");
-if($_GET[delid])
+if($_GET['delid'])
 {
 	$sql = "DELETE FROM product_purchase_record WHERE purchase_record_id='$_GET[delid]'";
 	$qsql = mysqli_query($con,$sql);
@@ -11,7 +11,7 @@ if($_GET[delid])
 	echo "<script>alert('Product deleted from cart');</script>";
 		}
 }
-if(isset($_GET[prodid]))
+if(isset($_GET['prodid']))
 {
 	$sql = "INSERT INTO product_purchase_record(product_purchase_bill_id, selling_prod_id,customer_id, quantity, cost, status,seller_id) VALUES ('0','$_GET[prodid]','$_SESSION[customerid]','1','$_GET[prodcost]','Pending','$_SESSION[sellerid]')";
 	$qsql = mysqli_query($con,$sql);
@@ -50,7 +50,7 @@ if(isset($_GET[prodid]))
                           <td>&nbsp;$rs1[product_description]</td>
                           <td>&nbsp;$rupeesymbol $rs[cost]</td>
                           <td>&nbsp;<input type='text' name='productcart' value='$rs[quantity]' size='3' onkeyup='changecost(this.value,$rs[purchase_record_id],$i)' /> $rs1[quantity_type]</td>
-                          <td>&nbsp;$rupeesymbol<span id='calccost$i'>" . $rs[cost] * $rs[quantity] ."</span></td>
+                          <td>&nbsp;$rupeesymbol<span id='calccost$i'>" . $rs['cost'] * $rs['quantity'] ."</span></td>
                           <td>&nbsp; <a href='displaycart.php?delid=$rs[purchase_record_id]' onclick='return delconfirm()'>Delete</a></td>					  
                         </tr>";
                         $i++;
