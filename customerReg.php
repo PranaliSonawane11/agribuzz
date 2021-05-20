@@ -47,7 +47,8 @@ $randnumber = rand();
 $_SESSION['randnumber'] = $randnumber;
 if(isset($_GET['editid']))
 {
-	$sql = "SELECT * FROM customer WHERE customer_id='$_GET[editid]'";
+	$sql = "SELECT * FROM customer WHERE customer_id ='$_GET[editid]'";
+	$con=mysqli_connect("localhost","root","","agribuzz");
 	$qsql = mysqli_query($con,$sql);
 	$rsedit = mysqli_fetch_array($qsql);
 }
