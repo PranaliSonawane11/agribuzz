@@ -22,7 +22,7 @@ include("dbconnection.php");
 									$qsql1 =mysqli_query($con,$sql1);
 								  while($rssql1 = mysqli_fetch_array($qsql1))
 								  {
-									  if($rssql1[country_id] == $_GET[country] )
+									  if($rssql1['country_id'] == $_GET['country'] )
 									  {
 									  echo "<option value='$rssql1[country_id]' selected>$rssql1[country]</option>";
 									  }
@@ -48,7 +48,7 @@ include("dbconnection.php");
 				<div class="row">
 
 <?php
-if(isset($_GET[submit]))
+if(isset($_GET['submit']))
 {
 	$sql = "SELECT * FROM product INNER JOIN seller ON product.seller_id = seller.seller_id  WHERE product.status='Active' and product.quantity>1 AND seller.state_id='$_GET[state]' and seller.country_id='$_GET[country]' and seller.city_id='$_GET[city]'";
 	                                 if(mysqli_num_rows($qsql)  == 0)
@@ -66,10 +66,10 @@ else
 ?>
     <div class="3u" >
         <section>
-            <a href="displaysalesdetailed.php?productid=<?php echo $rs[0]; ?>" class="image full"><img src='imgproduct/<?php echo $rs[img_1]; ?>'  height="243" width="282" alt=""></a>
+            <a href="displaysalesdetailed.php?productid=<?php echo $rs[0]; ?>" class="image full"><img src='imgproduct/<?php echo $rs['img_1']; ?>'  height="243" width="282" alt=""></a>
             <header>
-                <h2><?php echo $rs[title]; ?></h2>
-                <p><strong>Quantity :</strong> <?php echo $rs[quantity]; ?> <?php echo $rs[quantity_type]; ?></p>	
+                <h2><?php echo $rs['title']; ?></h2>
+                <p><strong>Quantity :</strong> <?php echo $rs['quantity']; ?> <?php echo $rs['quantity_type']; ?></p>	
                 <p><a href="displaysalesdetailed.php?productid=<?php echo $rs[0]; ?>">View Product detail</a></p>	
             </header>
             

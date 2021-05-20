@@ -2,9 +2,9 @@
 if(!isset($_SESSION)) { session_start(); }
 include("header.php");
 include("dbconnection.php");
-if(isset($_POST[submit]))
+if(isset($_POST['submit']))
 {
-	if(isset($_GET[editid]))
+	if(isset($_GET['editid']))
 	{
 		$sql ="UPDATE purchase_request SET customer_id='$_SESSION[customerid]', product_id='$_POST[product]', quantity='$_POST[quantity]', request_date='$_POST[requestdate]', request_date_expire='$_POST[expirydate]', note='$_POST[note]', status='$_POST[status]' WHERE purchase_request_id='$_GET[editid]'";
 		if(!mysqli_query($con,$sql))
@@ -57,9 +57,9 @@ $msgtoseller = "You have got purchase request for your produce $rsproduct[title]
 $msgcustomer = "You have sent purchase request for - $rsproduct[title]. To check the quality of the produce, you can contact $rsseller[seller_name] at $rsseller[mobile_no]. Farmer's Address: $rsseller[seller_address], $rs13city[city], $rs12state[state], $rs1country[country].  ";
 ?>
 <!--Message for seller -->
-<iframe style="display: none;" src="http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp?username=AgriBuzz&password=825848045&sendername=iiagro&mobileno=<?php echo $rsseller[mobile_no]; ?>&message=<?php echo $msgtoseller; ?>"></iframe>
+<iframe style="display: none;" src="http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp?username=AgriBuzz&password=825848045&sendername=iiagro&mobileno=<?php echo $rsseller['mobile_no']; ?>&message=<?php echo $msgtoseller; ?>"></iframe>
 <!--Message for customer -->
-<iframe style="display: none;" src="http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp?username=AgriBuzz&password=825848045&sendername=iiagro&mobileno=<?php echo $rscustomer[mobile_no]; ?>&message=<?php echo $msgcustomer; ?>"></iframe>
+<iframe style="display: none;" src="http://bulksms.mysmsmantra.com:8080/WebSMS/SMSAPI.jsp?username=AgriBuzz&password=825848045&sendername=iiagro&mobileno=<?php echo $rscustomer['mobile_no']; ?>&message=<?php echo $msgcustomer; ?>"></iframe>
 <?php			
 		}
 	}
@@ -100,41 +100,41 @@ $msgcustomer = "You have sent purchase request for - $rsproduct[title]. To check
    ?>
 						<section>
 							<header>
-								<h2><?php echo $rs[title]; ?></h2>
+								<h2><?php echo $rs['title']; ?></h2>
 							</header>
 <?php
 include("salesslider.php");
 ?>
 <br />
 							<h2><strong>Seller Information:</strong></h2>
-                            <strong>Seller name:  </strong><?php echo $rsseller[seller_name]; ?><br />
-                            <strong>Category: </strong><?php echo $rscategory[category]; ?><br />
-                            <strong>Produce: </strong><?php echo $rsproduce[produce]; ?><br />
-                            <strong>Variety: </strong><?php echo $rsvariety[variety]; ?><br />                                                                               
-                            <p><strong style="font-size:14px;">Quantity</strong>: <?php echo $rs[quantity]; ?> <?php echo $rs[quantity_type]; ?> 
+                            <strong>Seller name:  </strong><?php echo $rsseller['seller_name']; ?><br />
+                            <strong>Category: </strong><?php echo $rscategory['category']; ?><br />
+                            <strong>Produce: </strong><?php echo $rsproduce['produce']; ?><br />
+                            <strong>Variety: </strong><?php echo $rsvariety['variety']; ?><br />                                                                               
+                            <p><strong style="font-size:14px;">Quantity</strong>: <?php echo $rs['quantity']; ?> <?php echo $rs['quantity_type']; ?> 
                             </p>
-							<p><?php echo "<strong>Description: </strong>".$rs[description]; ?></p>
+							<p><?php echo "<strong>Description: </strong>".$rs['description']; ?></p>
                             
 								
                                 <h2><strong>Send A Purchase Request</strong></h2>
 						
                            <?php
-				if(isset($_POST[submit]))
+				if(isset($_POST['submit']))
 				{
 					echo "<h2>Purchase request sent successfully..</h2><h3><a href='viewpurchaserequest.php'>View purchase request</a></h3>";
 				}
 				else
 				{
-						   if(isset($_SESSION[customerid]))
+						   if(isset($_SESSION['customerid']))
 						   {						   				   
 						   ?>
                             <form method="post" action="" name="frmpurchaserequest" onSubmit="return validatepurchaserequest()">
-                            <input type="hidden" name="productid" value="<?php echo $rs[product_id]; ?>" />
+                            <input type="hidden" name="productid" value="<?php echo $rs['product_id']; ?>" />
 						  <table width="738" height="248" border="2">
 						    <tbody>
 						      <tr>
 						        <td width="139" align="right">Purchase Quantity<font color="#FF0000">*</font></td>
-						        <td width="581"><input type="number" max="<?php echo $rs[quantity]; ?>" name="quantity" id="quantity" value="<?php echo $rsedit[quantity]; ?>" autofocus> <font color="#FF0000">  (in <?php echo $rs[quantity_type]; ?> ) </font></td>
+						        <td width="581"><input type="number" max="<?php echo $rs['quantity']; ?>" name="quantity" id="quantity" value="<?php echo $rsedit['quantity']; ?>" autofocus> <font color="#FF0000">  (in <?php echo $rs['quantity_type']; ?> ) </font></td>
 					          </tr>
 						      <tr>
 						        <td align="right">Request Date  <font color="#FF0000">*</font></td>
@@ -146,7 +146,7 @@ include("salesslider.php");
 					          </tr>
 						      <tr>
 						        <td align="right">Note</td>
-						        <td><textarea name="note" id="note"><?php echo $rsedit[note]; ?></textarea></td>
+						        <td><textarea name="note" id="note"><?php echo $rsedit['note']; ?></textarea></td>
 					          </tr>
 						      <tr>
 						        <td height="15">&nbsp;</td>
@@ -160,7 +160,7 @@ include("salesslider.php");
 						   else
 						   {
 							?>
-                             <h2><a href='customerloginpanel.php?pagename=<?php echo basename($_SERVER['PHP_SELF']); ?>&productid=<?php echo $rs[product_id]; ?>'>Login to send purchase request..</a></h2>  
+                             <h2><a href='customerloginpanel.php?pagename=<?php echo basename($_SERVER['PHP_SELF']); ?>&productid=<?php echo $rs['product_id']; ?>'>Login to send purchase request..</a></h2>  
                            <?php
 						   }
 				}
